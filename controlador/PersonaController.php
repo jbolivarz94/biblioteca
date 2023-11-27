@@ -11,7 +11,7 @@
             $persona = new Persona();
             $personaMo = new PersonaModel();
 
-            $persona->setIdentificacion($arr["nombre"]);
+            $persona->setIdentificacion($arr["identificacion"]);
             $persona->setNombre($arr["nombre"]);
             $persona->setFecNacimiento($arr["fec_nacimiento"]);
             $persona->setSexo($arr["sexo"]);
@@ -23,6 +23,13 @@
             require_once("../modelo/PersonaModel.php");
             $personaMo = new PersonaModel();
             $persona = $personaMo->getPersona($arr["identificacion"]);
+            return [$persona->getNombre(),$persona->getIdentificacion(),$persona->getSexo(),$persona->getFecNacimiento(),$persona->getActivo()];
+        }
+
+        function getPersonas(){
+            require_once("../modelo/PersonaModel.php");
+            $personaMo = new PersonaModel();
+            $persona = $personaMo->getPersonas();
             return [$persona->getNombre(),$persona->getIdentificacion(),$persona->getSexo(),$persona->getFecNacimiento(),$persona->getActivo()];
         }
     }

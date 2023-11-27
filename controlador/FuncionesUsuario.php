@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 if (isset($_POST["login"])) {
 
     $usuario = $_POST["usuario"];
@@ -20,6 +18,18 @@ if (isset($_POST["tipo_usuario"])) {
     } elseif ($tipo_usuario == "bibliotecario") {
         header("Location: ../vistas/login.php");
     } 
+}
+
+if (isset($_POST["listarUsuarios"])) {
+    require_once("../controlador/PersonaController.php");
+    $personaController = new PersonaController();
+    $usuarios = $personaController->getPersonas();
+}
+
+if (isset($_POST["registrar"])) {
+    require_once("../controlador/PersonaController.php");
+    $personaController = new PersonaController();
+    $personaController->addPersona($_POST);
 }
 
 ?>

@@ -9,7 +9,7 @@
 
 <body>
     <h1>Formulario de Registro</h1>
-    <form action="procesar_registro.php" method="post">
+    <form action="../controlador/FuncionesUsuario.php" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
 
@@ -23,10 +23,10 @@
             <option value="F">Femenino</option>
         </select>
 
-        <label for="fechaNacimiento">Fecha Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+        <label for="fec_nacimiento">Fecha Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fec_nacimiento" required>
 
-        <input type="submit" value="Registrarse">
+        <input type="submit" value="Registrarse" name="registrar">
     </form>
 </body>
 </html>
