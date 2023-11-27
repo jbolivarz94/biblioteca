@@ -20,16 +20,31 @@ if (isset($_POST["tipo_usuario"])) {
     } 
 }
 
-if (isset($_POST["listarUsuarios"])) {
+if (isset($_POST["listarUsuarios"])) 
+{
     require_once("../controlador/PersonaController.php");
+    $usuariosArray = array();
     $personaController = new PersonaController();
-    $usuarios = $personaController->getPersonas();
+    $result = $personaController->getPersonas();
+
+    for ($i = 0; $i < count($result); $i++) {
+        $usuario = array(
+            'identificacion' => $result[$i]->getIdentificacion(),
+            'nombre' => $result[$i]->getNombre(),
+            'fecha_nacimiento' => $result[$i]->getFecNacimiento(),
+            'sexo' => $result[$i]->getSexo(),   
+            'activo' => $result[$i]->getActivo()       
+        );
+        $usuariosArray[] = $usuario;
+    } 
+    echo json_encode($usuariosArray);
 }
 
 if (isset($_POST["registrar"])) {
     require_once("../controlador/PersonaController.php");
     $personaController = new PersonaController();
     $personaController->addPersona($_POST);
+    header("Location: ../vistas/moduloBibliotecario.php");
 }
 
 ?>

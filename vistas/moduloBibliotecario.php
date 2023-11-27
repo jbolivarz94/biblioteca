@@ -13,7 +13,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li>
-                    <a href="listadoDeUsuarios.php" class="nav-link px-2 link-secondary">Usuarios</a>
+                    <a href="listadoDeUsuarios.html" class="nav-link px-2 link-secondary">Usuarios</a>
                 </li>
                 <li>
                     <a href="usuarios.php" class="nav-link px-2 link-secondary">Libros</a>

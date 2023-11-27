@@ -28,9 +28,9 @@
 
         function getPersonas(){
             require_once("../modelo/PersonaModel.php");
+            require_once("../modelo/Persona.php");
             $personaMo = new PersonaModel();
-            $persona = $personaMo->getPersonas();
-            return [$persona->getNombre(),$persona->getIdentificacion(),$persona->getSexo(),$persona->getFecNacimiento(),$persona->getActivo()];
+            return $personaMo->getPersonas();
         }
     }
 ?>
