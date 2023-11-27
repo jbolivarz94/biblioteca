@@ -12,4 +12,14 @@ if (isset($_POST["login"])) {
     header("Location: ../vistas/moduloBibliotecario.php");
     exit();
 }
+
+if (isset($_POST["tipo_usuario"])) {
+    $tipo_usuario = $_POST["tipo_usuario"];
+    if ($tipo_usuario == "estudiante") {
+        header("Location: ../vistas/moduloEstudiantes.php");
+    } elseif ($tipo_usuario == "bibliotecario") {
+        header("Location: ../vistas/login.php");
+    } 
+}
+
 ?>
