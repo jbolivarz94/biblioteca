@@ -10,6 +10,13 @@
 <body>
     <h1>Formulario de Registro</h1>
     <form action="../controlador/FuncionesUsuario.php" method="post">
+        <label for="tipo">Tipo de usuario:</label>
+        <select id="tipo" name="tipo">
+            <option value="selecciona" disabled selected>Selecciona el tipo</option>
+            <option value="ALUMNO">Alumno</option>
+            <option value="PROFESOR">Profesor</option>
+        </select>
+
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
 

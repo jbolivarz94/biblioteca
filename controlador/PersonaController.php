@@ -16,6 +16,7 @@
             $persona->setFecNacimiento($arr["fec_nacimiento"]);
             $persona->setSexo($arr["sexo"]);
             $persona->setActivo("INACTIVO");
+            $persona->setTipo($arr["tipo"]);
             return $personaMo->addPersona($persona);
         }
 
@@ -28,7 +29,7 @@
 
         function getPersonas(){
             require_once("../modelo/PersonaModel.php");
-            require_once("../modelo/Persona.php");
+            require_once("../modelo/dto/Persona.php");
             $personaMo = new PersonaModel();
             return $personaMo->getPersonas();
         }

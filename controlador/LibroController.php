@@ -15,7 +15,7 @@
 
         function getLibro($arr){
             require_once("../model/LibroModel.php");
-            require_once("../model/Libro.php");            
+            require_once("../model/dto/Libro.php");            
             $libroMo = new LibroModel();
             $libro = new Libro();
             $libro = $libroMo->getLibro($arr["isbn"]);
@@ -24,7 +24,7 @@
 
         function addLibro($arr){
             require_once("../model/LibroModel.php");
-            require_once("../model/Libro.php");
+            require_once("../model/dto/Libro.php");
             $libroMo = new LibroModel();
             $libro = new Libro();
 

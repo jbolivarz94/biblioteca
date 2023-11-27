@@ -5,6 +5,8 @@
         private $nombre;
         private $fec_nacimiento;
         private $sexo;
+
+        private $tipo;
         private $activo;
 
         public function __construct() {
@@ -48,6 +50,14 @@
 
         public function setActivo($activo) {
             $this->activo = $activo;
+        }
+
+        public function getTipo() {
+            return $this->tipo;
+        }
+
+        public function setTipo($tipo) {
+            $this->tipo = $tipo;
         }
     }
 ?>

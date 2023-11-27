@@ -10,8 +10,8 @@
             $this->prestamos=array();
         }
 
-        public function getPrestamos(){
-            $consulta=$this->db->query("SELECT * FROM prestamo");
+        public function getPrestamos($dni_persona){
+            $consulta=$this->db->query("SELECT * FROM prestamo WHERE dni_persona = '$dni_persona'");
             if($row= $consulta->fetch(PDO::FETCH_ASSOC)){
                 $prestamo = new Prestamo();
                 $prestamo->setDniPersona($row["dni_persona"]);
@@ -22,6 +22,7 @@
                 $prestamo->setfecDevolucion($row["fec_devolucion"]);
                 $prestamos[]=$prestamo;
             }
+            return $prestamos;
         }
 
         public function getPrestamo($id){

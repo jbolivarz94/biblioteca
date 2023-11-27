@@ -16,7 +16,8 @@
             $fec_nacimiento=$persona->getFecNacimiento();
             $sexo=$persona->getSexo();
             $activo=$persona->getActivo();
-            if($this->db->query("INSERT INTO persona(identificacion, nombre, fec_nacimiento, sexo, activo) VALUES ('$dni','$nombre','$fec_nacimiento','$sexo','$activo')")){
+            $tipo=$persona->getTipo();
+            if($this->db->query("INSERT INTO persona(identificacion, nombre, fec_nacimiento, sexo, activo, tipo) VALUES ('$dni','$nombre','$fec_nacimiento','$sexo','$activo','$tipo')")){
                 return true;
             }else{
                 return false;
@@ -45,6 +46,7 @@
                 $persona->setFecNacimiento($row["fec_nacimiento"]);
                 $persona->setActivo($row["activo"]);
                 $persona->setSexo($row["sexo"]);
+                $persona->setTipo($row["tipo"]);
             }
             return $persona;
         }
@@ -58,6 +60,7 @@
                 $persona->setFecNacimiento($row["fec_nacimiento"]);
                 $persona->setSexo($row["sexo"]);
                 $persona->setActivo($row["activo"]);
+                $persona->setTipo($row["tipo"]);
                 $personas[] = $persona;
             }
             return $personas;

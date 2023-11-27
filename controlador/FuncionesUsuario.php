@@ -29,6 +29,7 @@ if (isset($_POST["listarUsuarios"]))
 
     for ($i = 0; $i < count($result); $i++) {
         $usuario = array(
+            'tipo' => $result[$i]->getTipo(),
             'identificacion' => $result[$i]->getIdentificacion(),
             'nombre' => $result[$i]->getNombre(),
             'fecha_nacimiento' => $result[$i]->getFecNacimiento(),

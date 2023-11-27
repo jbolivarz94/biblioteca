@@ -23,10 +23,12 @@
                     var contenidosRecibidos = JSON.parse(xmlhttp.responseText);
                     for (var i = 0; i < contenidosRecibidos.length; i++) {
                         contenidosAMostrar += '<tr>';
+                        contenidosAMostrar += '<td>' + contenidosRecibidos[i].tipo + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].identificacion + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].nombre + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].fecha_nacimiento + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].sexo + '</td>';
+                        contenidosAMostrar += '<td>' + contenidosRecibidos[i].activo + '</td>';
                         contenidosAMostrar += '<td>';
                         contenidosAMostrar += '<form method="post" action="">';
                         contenidosAMostrar += '<input type="hidden" name="key" value="' + contenidosRecibidos[i].identificacion + '">';
@@ -65,11 +67,13 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Tipo</th>
                         <th>Identificacion</th>
                         <th>Nombre</th>
                         <th>Fecha De Nacimiento</th>
                         <th>Sexo</th>
                         <th>Estado</th>
+                        <th>...</th>
                     </tr>
                 </thead>
                 <tbody id="listarUsuarios">
