@@ -39,19 +39,52 @@
         }
     </style>
 </head>
+<script type="text/javascript">
+    function validar(){
+        var xmlhttp;
+        var formData = new URLSearchParams(new FormData(document.getElementById("frm_log"))).toString();
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST', '../controlador/FuncionesUsuario.php',true);
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var jsonResponse = JSON.parse(xmlhttp.responseText);
+                if(Object.keys(jsonResponse).length !== 0){
+                    window.location.href='../vistas/moduloBibliotecario.php';
+                }else{
+                    alert("user doesn't exist");
+                    document.getElementById('usuario').focus;
+                }
+            }
+        }        
+        xmlhttp.send(formData+"&login=login");
+    }
+
+    function validacion(){
+        if (document.getElementById('usuario').value == ""){
+            alert("Rellene el campo usuario");
+            document.getElementById('usuario').focus();
+        }else if(document.getElementById('password').value == ""){
+            alert("Rellene el campo password");
+            document.getElementById('password').focus();
+        }else{
+            validar();
+        }    
+    }
+</script>
 <body class="text-center">
     <main class="form-signin">
-        <form method="post" action="../controlador/FuncionesUsuario.php">
+        <form id="frm_log">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
             <div class="form-floating">
                 <input type="usuario" class="form-control" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
-                <label for="usuario">Username</label>
+                <label id="usuario" for="usuario">Username</label>
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
-                <label for="password">Password</label>
+                <label id="password "for="password">Password</label>
             </div>
-            <input class="w-100 btn btn-lg btn-primary" type="submit" name="login" value="login">
+            <button class="w-100 btn btn-lg btn-primary" type="button" onclick="validacion()">login</button>
         </form>
     </main>
 </body>

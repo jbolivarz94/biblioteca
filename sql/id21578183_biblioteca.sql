@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 26-11-2023 a las 22:28:29
--- Versión del servidor: 10.5.20-MariaDB
--- Versión de PHP: 7.3.33
+-- Host: localhost:3306
+-- Generation Time: Nov 28, 2023 at 02:49 PM
+-- Server version: 10.5.20-MariaDB
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `id21578183_biblioteca`
+-- Database: `id21578183_biblioteca`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -35,7 +35,7 @@ CREATE TABLE `categoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `libro`
+-- Table structure for table `libro`
 --
 
 CREATE TABLE `libro` (
@@ -49,7 +49,7 @@ CREATE TABLE `libro` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `persona`
+-- Table structure for table `persona`
 --
 
 CREATE TABLE `persona` (
@@ -57,13 +57,25 @@ CREATE TABLE `persona` (
   `nombre` varchar(100) NOT NULL,
   `fec_nacimiento` varchar(50) NOT NULL,
   `sexo` varchar(1) NOT NULL,
-  `activo` varchar(10) NOT NULL
+  `activo` varchar(10) NOT NULL,
+  `tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `persona`
+--
+
+INSERT INTO `persona` (`identificacion`, `nombre`, `fec_nacimiento`, `sexo`, `activo`, `tipo`) VALUES
+('0000777654', 'martha', '1981-03-11', 'F', 'INACTIVO', 'PROFESOR'),
+('1234', 'as', '2023-11-21', 'M', 'INACTIVO', ''),
+('12345', 'bryan', '2001-09-09', 'M', 'INACTIVO', 'ALUMNO'),
+('123456789', 'jorge', '1994-09-28', 'M', 'ACTIVO', 'ALUMNO'),
+('987654321', 'armando casas', '1977-11-08', 'M', 'ACTIVO', 'PROFESOR');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `prestamo`
+-- Table structure for table `prestamo`
 --
 
 CREATE TABLE `prestamo` (
@@ -78,7 +90,7 @@ CREATE TABLE `prestamo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -89,30 +101,30 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `libro`
+-- Indexes for table `libro`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`isbn`,`ejemplar`),
   ADD KEY `cod_categoria` (`cod_categoria`);
 
 --
--- Indices de la tabla `persona`
+-- Indexes for table `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`identificacion`);
 
 --
--- Indices de la tabla `prestamo`
+-- Indexes for table `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD PRIMARY KEY (`id`),
@@ -120,45 +132,45 @@ ALTER TABLE `prestamo`
   ADD KEY `dni_persona` (`dni_persona`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `prestamo`
+-- AUTO_INCREMENT for table `prestamo`
 --
 ALTER TABLE `prestamo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `libro`
+-- Constraints for table `libro`
 --
 ALTER TABLE `libro`
   ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`cod_categoria`) REFERENCES `categoria` (`id`) ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `prestamo`
+-- Constraints for table `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD CONSTRAINT `prestamo_ibfk_1` FOREIGN KEY (`dni_persona`) REFERENCES `persona` (`identificacion`) ON UPDATE NO ACTION,
@@ -168,3 +180,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
