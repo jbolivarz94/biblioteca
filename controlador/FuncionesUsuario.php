@@ -17,35 +17,50 @@ if (isset($_POST["tipo_usuario"])) {
         header("Location: ../vistas/moduloEstudiantes.php");
     } elseif ($tipo_usuario == "bibliotecario") {
         header("Location: ../vistas/login.php");
-    } 
+    }
 }
 
-if (isset($_POST["listarUsuarios"])) 
-{
+if (isset($_POST["listarUsuarios"])) {
     require_once("../controlador/PersonaController.php");
     $usuariosArray = array();
     $personaController = new PersonaController();
-    $result = $personaController->getPersonas();
+    $result = $personaController->getPersonas($_POST["estado"]);
+    if (!empty($result)) {
+        for ($i = 0; $i < count($result); $i++) {
+            $usuario = array(
+                'tipo' => $result[$i]->getTipo(),
+                'identificacion' => $result[$i]->getIdentificacion(),
+                'nombre' => $result[$i]->getNombre(),
+                'fecha_nacimiento' => $result[$i]->getFecNacimiento(),
+                'sexo' => $result[$i]->getSexo(),
+                'activo' => $result[$i]->getActivo()
+            );
+            $usuariosArray[] = $usuario;
+        }
+        echo json_encode($usuariosArray);
+    } else {
+        echo json_encode([]);
+    }
 
-    for ($i = 0; $i < count($result); $i++) {
-        $usuario = array(
-            'tipo' => $result[$i]->getTipo(),
-            'identificacion' => $result[$i]->getIdentificacion(),
-            'nombre' => $result[$i]->getNombre(),
-            'fecha_nacimiento' => $result[$i]->getFecNacimiento(),
-            'sexo' => $result[$i]->getSexo(),   
-            'activo' => $result[$i]->getActivo()       
-        );
-        $usuariosArray[] = $usuario;
-    } 
-    echo json_encode($usuariosArray);
 }
 
 if (isset($_POST["registrar"])) {
     require_once("../controlador/PersonaController.php");
     $personaController = new PersonaController();
     $personaController->addPersona($_POST);
-    header("Location: ../vistas/moduloBibliotecario.php");
+}
+
+if (isset($_POST["consultar_persona"])) {
+    header('Access-Control-Allow-Origin: *');
+    require_once("../controlador/PersonaController.php");
+    $personaController = new PersonaController();
+    $result = $personaController->getPersona($_POST);
+    if (!empty($result)) {
+        echo json_encode($result);
+    } else {
+        echo json_encode([]);
+    }
+
 }
 
 ?>

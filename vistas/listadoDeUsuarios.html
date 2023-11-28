@@ -11,7 +11,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
-        function usuarios() {
+        function usuarios(estado) {
             var xmlhttp;
             var nodoMostrarResultados = document.getElementById('listarUsuarios');
             var contenidosAMostrar = '';
@@ -29,58 +29,47 @@
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].fecha_nacimiento + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].sexo + '</td>';
                         contenidosAMostrar += '<td>' + contenidosRecibidos[i].activo + '</td>';
-                        contenidosAMostrar += '<td>';
-                        contenidosAMostrar += '<form method="post" action="">';
-                        contenidosAMostrar += '<input type="hidden" name="key" value="' + contenidosRecibidos[i].identificacion + '">';
-                        contenidosAMostrar += '<input type="submit" name="eliminar" value="Eliminar">';
-                        contenidosAMostrar += '</form>';
-                        contenidosAMostrar += '</td>';
                         contenidosAMostrar += '</tr>';
                     }
                     nodoMostrarResultados.innerHTML = contenidosAMostrar;
                 }
             }
 
-            var parametros = 'listarUsuarios';
+            var parametros = 'listarUsuarios&estado='+estado;
             xmlhttp.open('POST', '../controlador/FuncionesUsuario.php');
             xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xmlhttp.send(parametros);
         }
     </script>
 </head>
+<body class="container">
+    <h1>Usuarios</h1>
 
-<body>
-    <div class="container">
-        <h1>Usuarios</h1>
-        <div class="row">
-            <div class="col-6">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button class="btn btn-primary" onclick="window.location.href='registro.php';">Nueva
-                        Usuario</button>
-                </div>
-            </div>
-            <div class="col-6">
-            </div>
-        </div>
-        <button onclick="usuarios()">Cargar Usuarios</button>
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Identificacion</th>
-                        <th>Nombre</th>
-                        <th>Fecha De Nacimiento</th>
-                        <th>Sexo</th>
-                        <th>Estado</th>
-                        <th>...</th>
-                    </tr>
-                </thead>
-                <tbody id="listarUsuarios">
+    <div class="row">
+        <div class="col-6">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='registro.html';">Nuevo Usuario</button>
+                <button type="button" class="btn btn-primary" onclick="usuarios('ACTIVO')">Cargar Usuarios Activos</button>
+                <button type="button" class="btn btn-primary" onclick="usuarios('INACTIVO')">Cargar Usuarios Inactivos</button>
+              </div>
+        </div>        
+    </div>      
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Fecha De Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="listarUsuarios">
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </body>
 

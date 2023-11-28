@@ -21,17 +21,27 @@
         }
 
         function getPersona($arr){
-            require_once("../modelo/PersonaModel.php");
+            require_once("../modelo/PersonaModel.php");            
+            require_once("../modelo/dto/Persona.php");
             $personaMo = new PersonaModel();
             $persona = $personaMo->getPersona($arr["identificacion"]);
-            return [$persona->getNombre(),$persona->getIdentificacion(),$persona->getSexo(),$persona->getFecNacimiento(),$persona->getActivo()];
+            if($persona != null){
+                return [$persona->getNombre(),$persona->getIdentificacion(),$persona->getSexo(),$persona->getFecNacimiento(),$persona->getActivo()];
+            }else{
+                return [];
+            }
         }
 
-        function getPersonas(){
+        function getPersonas($estado){
             require_once("../modelo/PersonaModel.php");
             require_once("../modelo/dto/Persona.php");
             $personaMo = new PersonaModel();
-            return $personaMo->getPersonas();
+            if($personaMo != null){
+                return $personaMo->getPersonas($estado);
+            }else{
+                return [];
+            }
+            
         }
     }
 ?>
