@@ -48,5 +48,18 @@
             }
             return $libro;
         }
+
+        public function getLibropag($num_paginas){
+            $consulta = $this->db->query("SELECT * FROM libro WHERE num_paginas<= '$num_paginas'");
+            if($row= $consulta->fetch(PDO::FETCH_ASSOC)){
+                $libro = new Libro();
+                $libro->setIsbn($row["isbn"]);
+                $libro->setEjemplar($row["ejemplar"]);
+                $libro->setNum_paginas($row["num_paginas"]);
+                $libro->setCod_categoria($row["cod_categoria"]);
+                $libro->setNombre($row["nombre"]);   
+            }
+            return $libro;
+        }
     }
 ?>

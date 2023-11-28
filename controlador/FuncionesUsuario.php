@@ -7,8 +7,11 @@ if (isset($_POST["login"])) {
     require_once("../controlador/UsuarioController.php");
     $usuarioController = new UsuarioController();
     $result = $usuarioController->getUsuario(["usuario" => $usuario, "password" => $password]);
-    header("Location: ../vistas/moduloBibliotecario.php");
-    exit();
+    if (!empty($result)) {
+        echo json_encode($result);
+    } else {
+        echo json_encode([]);
+    }
 }
 
 if (isset($_POST["tipo_usuario"])) {
